@@ -7,7 +7,7 @@
 # Description : Comparaison de fichiers
 #===============================================================================
 
-def comparerFichiers(fichier1, fichier2, resultat, precision, caractere=" "):
+def comparerFichiers(fichier1, fichier2, resultat, precision, separateur=" "):
     from ComparaisonElements import identiques
     from LectureEcritureFichier import lireFichier
     from OperationsTexte import joindreEtConvertirTexte, separerEtConvertirListeTexte
@@ -24,8 +24,8 @@ def comparerFichiers(fichier1, fichier2, resultat, precision, caractere=" "):
     body_h1 = ElementTree.SubElement(body, "h1")
     body_h1.text = titre
 
-    lignes1 = separerEtConvertirListeTexte(lireFichier(fichier1), caractere)
-    lignes2 = separerEtConvertirListeTexte(lireFichier(fichier2), caractere)
+    lignes1 = separerEtConvertirListeTexte(lireFichier(fichier1), separateur)
+    lignes2 = separerEtConvertirListeTexte(lireFichier(fichier2), separateur)
     nbLignes1 = len(lignes1)
     nbLignes2 = len(lignes2)
     if nbLignes1 != nbLignes2:
@@ -41,8 +41,8 @@ def comparerFichiers(fichier1, fichier2, resultat, precision, caractere=" "):
             nbElements2 = len(elements2)
             if nbElements1 != nbElements2:
                 note = str("Ligne %d : nombre d'éléments différent" % (itLigne + 1)).decode("utf-8")
-                contexte1 = str("Contexte 1 = %s" % (joindreEtConvertirTexte(elements1, caractere))).decode("utf-8")
-                contexte2 = str("Contexte 2 = %s" % (joindreEtConvertirTexte(elements2, caractere))).decode("utf-8")
+                contexte1 = str("Contexte 1 = %s" % (joindreEtConvertirTexte(elements1, separateur))).decode("utf-8")
+                contexte2 = str("Contexte 2 = %s" % (joindreEtConvertirTexte(elements2, separateur))).decode("utf-8")
                 construireDifference(body, note, contexte1, contexte2)
             else:
                 for itElement in range(nbElements1):

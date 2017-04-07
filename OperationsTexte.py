@@ -32,38 +32,38 @@ def convertirNombreEnTexte(nombre, retourNul=False):
 def convertirDateEnTexte(date, formatDate="%d/%m/%Y %H:%M:%S"):
     return date.strftime(formatDate)
 
-def separerTexte(texte, caractere=" "):
-    return [element for element in texte.split(caractere) if element is not None]
+def separerTexte(texte, separateur=" "):
+    return [element for element in texte.split(separateur) if element is not None]
 
-def joindreTexte(texte, caractere=" "):
-    return caractere.join(texte)
+def joindreTexte(texte, separateur=" "):
+    return separateur.join(texte)
 
-def nettoyerTexte(texte, caractere=" "):
-    return joindreTexte(separerTexte(texte, caractere), caractere)
+def nettoyerTexte(texte, separateur=" "):
+    return joindreTexte(separerTexte(texte, separateur), separateur)
 
-def separerListeTexte(listeTexte, caractere=" "):
-    return [separerTexte(element, caractere) for element in listeTexte]
+def separerListeTexte(listeTexte, separateur=" "):
+    return [separerTexte(element, separateur) for element in listeTexte]
 
-def joindreListeTexte(listeTexte, caractere=" "):
-    return [joindreTexte(element, caractere) for element in listeTexte]
+def joindreListeTexte(listeTexte, separateur=" "):
+    return [joindreTexte(element, separateur) for element in listeTexte]
 
-def nettoyerListeTexte(listeTexte, caractere=" "):
-    return [nettoyerTexte(element, caractere) for element in listeTexte]
+def nettoyerListeTexte(listeTexte, separateur=" "):
+    return [nettoyerTexte(element, separateur) for element in listeTexte]
 
-def separerEtConvertirTexte(texte, caractere=" "):
-    return [convertirTexteEnNombre(element) for element in separerTexte(texte, caractere)]
+def separerEtConvertirTexte(texte, separateur=" "):
+    return [convertirTexteEnNombre(element) for element in separerTexte(texte, separateur)]
 
-def joindreEtConvertirTexte(texte, caractere=" "):
-    return joindreTexte([convertirNombreEnTexte(element) for element in texte], caractere)
+def joindreEtConvertirTexte(texte, separateur=" "):
+    return joindreTexte([convertirNombreEnTexte(element) for element in texte], separateur)
 
-def nettoyerEtConvertirTexte(texte, caractere=" "):
-    return joindreEtConvertirTexte(separerEtConvertirTexte(texte, caractere), caractere)
+def nettoyerEtConvertirTexte(texte, separateur=" "):
+    return joindreEtConvertirTexte(separerEtConvertirTexte(texte, separateur), separateur)
 
-def separerEtConvertirListeTexte(listeTexte, caractere=" "):
-    return [separerEtConvertirTexte(element, caractere) for element in listeTexte]
+def separerEtConvertirListeTexte(listeTexte, separateur=" "):
+    return [separerEtConvertirTexte(element, separateur) for element in listeTexte]
 
-def joindreEtConvertirListeTexte(listeTexte, caractere=" "):
-    return [joindreEtConvertirTexte(element, caractere) for element in listeTexte]
+def joindreEtConvertirListeTexte(listeTexte, separateur=" "):
+    return [joindreEtConvertirTexte(element, separateur) for element in listeTexte]
 
-def nettoyerEtConvertirListeTexte(listeTexte, caractere=" "):
-    return [nettoyerEtConvertirTexte(element, caractere) for element in listeTexte]
+def nettoyerEtConvertirListeTexte(listeTexte, separateur=" "):
+    return [nettoyerEtConvertirTexte(element, separateur) for element in listeTexte]
