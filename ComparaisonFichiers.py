@@ -70,6 +70,7 @@ def comparerFichiers(fichier1, fichier2, resultat, precision, separateur=" "):
 
 def construireDifference(parent, note, contexte1, contexte2):
     from xml.etree import ElementTree
+
     p1 = ElementTree.SubElement(parent, "p")
     ul = ElementTree.SubElement(parent, "ul")
     li1 = ElementTree.SubElement(ul, "li")
