@@ -94,6 +94,15 @@ class Points(object):
             listePointsInterpoles.append(pointInterpole)
         return listePointsInterpoles
 
+    def recupererPolynome(self, degre):
+        from numpy import poly1d, polyfit
+        listePoints = self.getListePoints()
+        abscisses = [point.getX() for point in listePoints]
+        ordonnees = [point.getY() for point in listePoints]
+        coefficients = polyfit(abscisses, ordonnees, degre, full=True)[0]
+        polynome = poly1d(coefficients)
+        return polynome, list(reversed(coefficients.tolist()))
+
     def estTrie(self):
         abscisses = [point.getX() for point in self.getListePoints()]
         abscissesTriees = sorted(abscisses)
