@@ -125,3 +125,16 @@ def interpolerFichier(fichierEntree, fichierSortie, pas):
         convertirNombreEnTexte(pointInterpole.getY()))) \
         for pointInterpole in listePointsInterpoles]
     ecrireFichier(fichierSortie, lignesFichierSortie)
+
+def recupererPolynomeFichier(fichierEntree, degre):
+    from LectureEcritureFichier import lireFichier
+    from OperationsTexte import separerEtConvertirTexte
+
+    listePoints = Points()
+    lignesFichierEntree = lireFichier(fichierEntree)
+    for ligne in lignesFichierEntree:
+        x = separerEtConvertirTexte(ligne)[0]
+        y = separerEtConvertirTexte(ligne)[1]
+        point = Point(x, y)
+        listePoints.ajouterPoint(point)
+    return listePoints.recupererPolynome(degre)
