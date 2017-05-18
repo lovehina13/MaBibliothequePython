@@ -4,7 +4,7 @@
 # Name        : Points.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
 # Version     : 1.0 (07/04/2017)
-# Description : Point, liste de points et interpolation
+# Description : Point, liste de points, interpolation et polynôme
 #===============================================================================
 
 class Point(object):
