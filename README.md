@@ -7,6 +7,7 @@ Les fonctionnalités de la bibliothèque sont les suivantes :
  - Lecture et écriture de fichier,
  - Conversion, séparation, jointure et nettoyage de texte,
  - Point, liste de points, interpolation et polynôme,
+ - Temps et liste de temps,
  - Itérateur de nombres,
  - Comparaison d'éléments,
  - Comparaison de fichiers,

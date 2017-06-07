@@ -49,9 +49,10 @@ class Points(object):
             self.ajouterPoint(point)
 
     def ajouterPoint(self, point, trier=True):
-        self.__listePoints.append(point)
-        if trier:
-            self.__listePoints.sort(key=lambda point: (point.getX(), point.getY()))
+        if isinstance(point, Point):
+            self.__listePoints.append(point)
+            if trier:
+                self.__listePoints.sort(key=lambda point: (point.getX(), point.getY()))
 
     def interpolerPoint(self, x):
         listePoints = self.getListePoints()
