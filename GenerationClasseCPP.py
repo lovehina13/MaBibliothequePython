@@ -300,7 +300,7 @@ class Classe_Source(Classe):
         return texte
     def gen_constructeurs(self):
         texte = str()
-        texte += "%s::%s()%s\n{\n    this->clear();\n}" % (self.nom, self.nom, " :\n        %s" % (self.get_membres_initialisations()) if len(self.membres) else "") + "\n\n"
+        texte += "%s::%s()%s\n{\n    this->clear();\n}" % (self.nom, self.nom, " :\n        %s" % (self.get_membres_initialisations()) if self.get_membres_initialisations() != "" else "") + "\n\n"
         texte += "%s::%s(%s) :\n        %s()\n{\n    this->set(%s);\n}" % (self.nom, self.nom, self.get_membres_parametres(), self.nom, self.get_membres()) + "\n\n"
         texte += "%s::%s(%s) :\n        %s()\n{\n    this->copy(%s);\n}" % (self.nom, self.nom, self.get_parametre(), self.nom, self.nomMinuscule()) + "\n\n"
         texte += "%s::~%s()\n{\n\n}" % (self.nom, self.nom) + "\n"
@@ -342,8 +342,10 @@ class Classe_Source(Classe):
     def gen_structures(self):
         return str()
 
-import os, sys
+# Programme principal
+
 from LectureEcritureFichier import lireFichier, ecrireFichier
+import os, sys
 
 if __name__ == "__main__":
     fichierDefinitions = sys.argv[1]

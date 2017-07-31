@@ -7,8 +7,7 @@
 
 #include "ClasseMere.h"
 
-ClasseMere::ClasseMere() :
-        
+ClasseMere::ClasseMere()
 {
     this->clear();
 }

@@ -7,8 +7,7 @@
 
 #include "ClasseFille.h"
 
-ClasseFille::ClasseFille() :
-        
+ClasseFille::ClasseFille()
 {
     this->clear();
 }
