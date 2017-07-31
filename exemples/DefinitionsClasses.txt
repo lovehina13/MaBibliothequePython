@@ -1,0 +1,21 @@
+a Alexis;Foerster;alexis.foerster@gmail.com
+v 1.0.0;31/07/2017
+
+c ClasseValeurs
+m int nombreEntier
+m double nombreReel
+m std::string texte
+
+c ClassePointeurs
+m int* pointeurNombreEntier
+m double* pointeurNombreReel
+m std::string* pointeurTexte
+
+c ClasseMere
+m std::string nom
+m ClasseValeurs valeurs
+
+c ClasseFille
+h ClasseMere
+m ClassePointeurs pointeurs
+
