@@ -350,7 +350,7 @@ import os, sys
 if __name__ == "__main__":
     fichierDefinitions = sys.argv[1]
     repertoireEntetes = sys.argv[2]
-    repertoireSources = sys.argv[2]
+    repertoireSources = sys.argv[3]
     if not os.path.isdir(repertoireEntetes):
         os.mkdir(repertoireEntetes)
     if not os.path.isdir(repertoireSources):
