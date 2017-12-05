@@ -35,7 +35,7 @@ class Membre(object):
         return "const %s%s %s" % (self.type, "&" if not self.estPointeur() else "*", self.nom)
     def get_valeur_defaut(self):
         if self.estPointeur():
-            return "0"
+            return "NULL"
         elif self.estNatif():
             if self.type in ["bool"]:
                 return "false"
