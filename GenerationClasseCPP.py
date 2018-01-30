@@ -10,6 +10,7 @@
 # Classe de définition d'un auteur
 
 class Auteur(object):
+
     def __init__(self, prenom, nom, email):
         self.prenom = prenom
         self.nom = nom
@@ -18,6 +19,7 @@ class Auteur(object):
 # Classe de définition d'une version
 
 class Version(object):
+
     def __init__(self, numero, date):
         self.numero = numero
         self.date = date
@@ -25,14 +27,18 @@ class Version(object):
 # Classe abstraite de définition d'un membre
 
 class Membre(object):
+
     def __init__(self, nom, type, mode=""):
         self.nom = nom
         self.type = type
         self.mode = mode
+
     def get_declaration(self):
         return "%s%s %s" % (self.type, self.mode, self.nom)
+
     def get_parametre(self):
         return "const %s%s %s" % (self.type, "&" if not self.estPointeur() else "*", self.nom)
+
     def get_valeur_defaut(self):
         if self.estPointeur():
             return "NULL"
@@ -45,52 +51,69 @@ class Membre(object):
                 return "0.0"
         else:
             return "%s()" % (self.type)
+
     def get_initialisation(self):
         return "%s(%s)" % (self.nom, self.get_valeur_defaut())
+
     def get_getter(self): pass  # Méthode virtuelle pure
+
     def get_setter(self): pass  # Méthode virtuelle pure
+
     def estPointeur(self):
         return self.mode == "*"
+
     def estReference(self):
         return self.mode == "&"
+
     def estNatif(self):
         return self.type in ["bool", "char", "int", "float", "double", "unsigned int", "unsigned float", "unsigned double"]
+
     def estStandard(self):
         return self.type.startswith("std::string") or self.type.startswith("std::vector") or self.type.startswith("std::map")
+
     def nomMajuscule(self):
         return str(self.nom[0].upper() + self.nom[1:])
 
 # Classe de définition d'un membre dans le fichier d'entête
 
 class Membre_Entete(Membre):
+
     def __init__(self, nom, type, mode=""):
         super(Membre_Entete, self).__init__(nom, type, mode)
+
     def get_getter(self):
         return "const %s%s get%s() const" % (self.type, "&" if not self.estPointeur() else "*", self.nomMajuscule())
+
     def get_setter(self):
         return "void set%s(%s)" % (self.nomMajuscule(), self.get_parametre())
 
 # Classe de définition d'un membre dans le fichier source
 
 class Membre_Source(Membre):
+
     def __init__(self, nom, type, mode=""):
         super(Membre_Source, self).__init__(nom, type, mode)
+
     def get_getter(self, classe):
         return "const %s%s %s::get%s() const\n{\n    return this->%s;\n}" % (self.type, "&" if not self.estPointeur() else "*", classe.nom, self.nomMajuscule(), self.nom)
+
     def get_setter(self, classe):
         return "void %s::set%s(%s)\n{\n    this->%s = %s%s;\n}" % (classe.nom, self.nomMajuscule(), self.get_parametre(), self.nom, "" if not self.estPointeur() else "(%s*) " % (self.type), self.nom)
 
 # Classe abstraite de définition d'une classe
 
 class Classe(object):
+
     def __init__(self, nom, heritage=None, membres=None, auteur=None, version=None):
         self.nom = nom
         self.heritage = heritage
         self.membres = membres if membres is not None else []
         self.auteur = auteur if auteur is not None else Auteur("FirstName", "LastName", "FirstName.LastName@DomainName.DomaineExt")
         self.version = version if version is not None else Version("1.0.0", "DD/MM/YYYY")
+
     def get_parametre(self):
         return "const %s& %s" % (self.nom, self.nomMinuscule())
+
     def get_inclusions(self):
         inclusions = []
         if self.heritage is not None:
@@ -101,47 +124,65 @@ class Classe(object):
             if membre.type not in inclusions:
                 inclusions.append(membre.type)
         return sorted(inclusions)
+
     def get_membres(self):
         membres = str()
         for membre in self.membres:
             membres += membre.nom + ", "
         return membres.rstrip(", ")
+
     def get_membres_parametres(self):
         membres = str()
         for membre in self.membres:
             membres += membre.get_parametre() + ", "
         return membres.rstrip(", ")
+
     def get_membres_valeurs_defaut(self):
         membres = str()
         for membre in self.membres:
             membres += membre.get_valeur_defaut() + ", "
         return membres.rstrip(", ")
+
     def get_membres_initialisations(self):
         membres = str()
         for membre in self.membres:
             if membre.estNatif() or membre.estPointeur():
                 membres += membre.get_initialisation() + ", "
         return membres.rstrip(", ")
+
     def gen_classe(self): pass  # Méthode virtuelle pure
+
     def gen_entete(self): pass  # Méthode virtuelle pure
+
     def gen_inclusions(self): pass  # Méthode virtuelle pure
+
     def gen_constructeurs(self): pass  # Méthode virtuelle pure
+
     def gen_getters(self): pass  # Méthode virtuelle pure
+
     def gen_setters(self): pass  # Méthode virtuelle pure
+
     def gen_methodes_generiques(self): pass  # Méthode virtuelle pure
+
     def gen_methodes_specifiques(self): pass  # Méthode virtuelle pure
+
     def gen_membres(self): pass  # Méthode virtuelle pure
+
     def gen_structures(self): pass  # Méthode virtuelle pure
+
     def nomMinuscule(self):
         return str(self.nom[0].lower() + self.nom[1:])
+
     def nomMajuscules(self):
         return str(self.nom.upper())
 
 # Classe de définition d'une classe dans le fichier d'entête
 
 class Classe_Entete(Classe):
+
     def __init__(self, nom, heritage=None, membres=None, auteur=None, version=None):
         super(Classe_Entete, self).__init__(nom, heritage, membres, auteur, version)
+
     def gen_classe(self):
         texte = str()
         texte += self.gen_entete() + "\n"
@@ -158,6 +199,7 @@ class Classe_Entete(Classe):
         texte += self.gen_structures() + "\n"
         texte += self.gen_definition_fin() + "\n"
         return texte
+
     def gen_entete(self):
         texte = str()
         texte += "//==============================================================================" + "\n"
@@ -167,11 +209,13 @@ class Classe_Entete(Classe):
         texte += "// Description : Header file of the %s class" % (self.nom) + "\n"
         texte += "//==============================================================================" + "\n"
         return texte
+
     def gen_definition_debut(self):
         texte = str()
         texte += "#ifndef %s_H" % (self.nomMajuscules()) + "\n"
         texte += "#define %s_H" % (self.nomMajuscules()) + "\n"
         return texte
+
     def gen_inclusions(self):
         texte = str()
         for inclusion in self.get_inclusions():
@@ -180,6 +224,7 @@ class Classe_Entete(Classe):
         texte += "#include <string>" + "\n"
         texte += "#include <vector>" + "\n"
         return texte
+
     def gen_classe_debut(self):
         texte = str()
         if self.heritage is None:
@@ -189,6 +234,7 @@ class Classe_Entete(Classe):
         texte += "{" + "\n"
         texte += "public:" + "\n"
         return texte.rstrip("\n")
+
     def gen_constructeurs(self):
         texte = str()
         texte += "    // Constructeurs et destructeurs" + "\n"
@@ -197,18 +243,21 @@ class Classe_Entete(Classe):
         texte += "    %s(%s);" % (self.nom, self.get_parametre()) + "\n"
         texte += "    virtual ~%s();" % (self.nom) + "\n"
         return texte
+
     def gen_getters(self):
         texte = str()
         texte += "    // Getters" + "\n"
         for membre in self.membres:
             texte += "    %s;" % (membre.get_getter()) + "\n"
         return texte
+
     def gen_setters(self):
         texte = str()
         texte += "    // Setters" + "\n"
         for membre in self.membres:
             texte += "    %s;" % (membre.get_setter()) + "\n"
         return texte
+
     def gen_methodes_generiques(self):
         texte = str()
         texte += "    // Méthodes génériques" + "\n"
@@ -219,11 +268,13 @@ class Classe_Entete(Classe):
         texte += "    void fromString(const std::string& fromString, const char& sep);" + "\n"
         texte += "    const std::string toString(const char& sep) const;" + "\n"
         return texte
+
     def gen_methodes_specifiques(self):
         texte = str()
         texte += "    // Méthodes spécifiques" + "\n"
         texte += "    // TODO Méthodes spécifiques de la classe '%s'" % (self.nom) + "\n"
         return texte
+
     def gen_membres(self):
         texte = str()
         texte += "private:" + "\n"
@@ -231,10 +282,12 @@ class Classe_Entete(Classe):
         for membre in self.membres:
             texte += "    %s;" % (membre.get_declaration()) + "\n"
         return texte.rstrip("\n")
+
     def gen_classe_fin(self):
         texte = str()
         texte += "};" + "\n"
         return texte
+
     def gen_structures(self):
         texte = str()
         texte += "typedef %s* Ptr%s;" % (self.nom, self.nom) + "\n"
@@ -245,6 +298,7 @@ class Classe_Entete(Classe):
         texte += "typedef std::map<std::string, %s> MapNoms%s_;" % (self.nom, self.nom) + "\n"
         texte += "typedef std::map<std::string, Ptr%s> MapNomsPtr%s_;" % (self.nom, self.nom) + "\n"
         return texte
+
     def gen_definition_fin(self):
         texte = str()
         texte += "#endif // %s_H" % (self.nomMajuscules()) + "\n"
@@ -253,18 +307,22 @@ class Classe_Entete(Classe):
 # Classe de définition d'une classe dans le fichier source
 
 class Classe_Source(Classe):
+
     def __init__(self, nom, heritage=None, membres=None, auteur=None, version=None):
         super(Classe_Source, self).__init__(nom, heritage, membres, auteur, version)
+
     def get_membres_getters(self):
         membres = str()
         for membre in self.membres:
             membres += "%s.get%s()" % (self.nomMinuscule(), membre.nomMajuscule()) + ", "
         return membres.rstrip(", ")
+
     def get_membres_setters(self):
         membres = str()
         for membre in self.membres:
             membres += "    this->set%s(%s);" % (membre.nomMajuscule(), membre.nom) + "\n"
         return membres.rstrip("\n")
+
     def get_membres_comparaisons(self):
         membres = str()
         for membre in self.membres:
@@ -276,6 +334,7 @@ class Classe_Source(Classe):
                 membres += "    if (!this->get%s()->equals(*%s.get%s()))" % (membre.nomMajuscule(), self.nomMinuscule(), membre.nomMajuscule()) + "\n"
             membres += "        return false;" + "\n"
         return membres.rstrip("\n")
+
     def gen_classe(self):
         texte = str()
         texte += self.gen_entete() + "\n"
@@ -285,6 +344,7 @@ class Classe_Source(Classe):
         texte += self.gen_setters() + "\n"
         texte += self.gen_methodes_generiques() + "\n"
         return texte
+
     def gen_entete(self):
         texte = str()
         texte += "//==============================================================================" + "\n"
@@ -294,10 +354,12 @@ class Classe_Source(Classe):
         texte += "// Description : Source file of the %s class" % (self.nom) + "\n"
         texte += "//==============================================================================" + "\n"
         return texte
+
     def gen_inclusions(self):
         texte = str()
         texte += "#include \"%s.h\"" % (self.nom) + "\n"
         return texte
+
     def gen_constructeurs(self):
         texte = str()
         texte += "%s::%s()%s\n{\n    this->clear();\n}" % (self.nom, self.nom, " :\n        %s" % (self.get_membres_initialisations()) if self.get_membres_initialisations() != "" else "") + "\n\n"
@@ -305,16 +367,19 @@ class Classe_Source(Classe):
         texte += "%s::%s(%s) :\n        %s()\n{\n    this->copy(%s);\n}" % (self.nom, self.nom, self.get_parametre(), self.nom, self.nomMinuscule()) + "\n\n"
         texte += "%s::~%s()\n{\n\n}" % (self.nom, self.nom) + "\n"
         return texte
+
     def gen_getters(self):
         texte = str()
         for membre in self.membres:
             texte += membre.get_getter(self) + "\n\n"
         return texte.rstrip("\n") + "\n"
+
     def gen_setters(self):
         texte = str()
         for membre in self.membres:
             texte += membre.get_setter(self) + "\n\n"
         return texte.rstrip("\n") + "\n"
+
     def gen_methodes_generiques(self):
         texte = str()
         texteClear = "    this->set(%s);" % (self.get_membres_valeurs_defaut()) + "\n"
@@ -335,10 +400,13 @@ class Classe_Source(Classe):
         texte += "void %s::fromString(const std::string& fromString, const char& sep)\n{\n%s\n}" % (self.nom, texteFromString.rstrip("\n")) + "\n\n"
         texte += "const std::string %s::toString(const char& sep) const\n{\n%s\n}" % (self.nom, texteToString.rstrip("\n")) + "\n\n"
         return texte.rstrip("\n")
+
     def gen_methodes_specifiques(self):
         return str()
+
     def gen_membres(self):
         return str()
+
     def gen_structures(self):
         return str()
 
