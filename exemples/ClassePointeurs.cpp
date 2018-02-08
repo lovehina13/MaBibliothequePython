@@ -100,4 +100,3 @@ const std::string ClassePointeurs::toString(const char& sep) const
 #warning "'const std::string ClassePointeurs::toString(const char& sep) const' not implemented"
     return std::string();
 }
-

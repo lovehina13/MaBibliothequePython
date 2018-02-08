@@ -58,4 +58,3 @@ typedef std::map<std::string, ClassePointeurs> MapNomsClassePointeurs_;
 typedef std::map<std::string, PtrClassePointeurs> MapNomsPtrClassePointeurs_;
 
 #endif // CLASSEPOINTEURS_H
-

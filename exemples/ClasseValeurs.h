@@ -58,4 +58,3 @@ typedef std::map<std::string, ClasseValeurs> MapNomsClasseValeurs_;
 typedef std::map<std::string, PtrClasseValeurs> MapNomsPtrClasseValeurs_;
 
 #endif // CLASSEVALEURS_H
-

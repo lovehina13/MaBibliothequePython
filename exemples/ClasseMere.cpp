@@ -86,4 +86,3 @@ const std::string ClasseMere::toString(const char& sep) const
 #warning "'const std::string ClasseMere::toString(const char& sep) const' not implemented"
     return std::string();
 }
-

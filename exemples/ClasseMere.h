@@ -56,4 +56,3 @@ typedef std::map<std::string, ClasseMere> MapNomsClasseMere_;
 typedef std::map<std::string, PtrClasseMere> MapNomsPtrClasseMere_;
 
 #endif // CLASSEMERE_H
-

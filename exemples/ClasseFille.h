@@ -54,4 +54,3 @@ typedef std::map<std::string, ClasseFille> MapNomsClasseFille_;
 typedef std::map<std::string, PtrClasseFille> MapNomsPtrClasseFille_;
 
 #endif // CLASSEFILLE_H
-

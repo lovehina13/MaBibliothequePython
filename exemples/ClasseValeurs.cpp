@@ -100,4 +100,3 @@ const std::string ClasseValeurs::toString(const char& sep) const
 #warning "'const std::string ClasseValeurs::toString(const char& sep) const' not implemented"
     return std::string();
 }
-

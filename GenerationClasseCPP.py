@@ -198,7 +198,7 @@ class Classe_Entete(Classe):
         texte += self.gen_classe_fin() + "\n"
         texte += self.gen_structures() + "\n"
         texte += self.gen_definition_fin() + "\n"
-        return texte
+        return texte.strip("\n")
 
     def gen_entete(self):
         texte = str()
@@ -343,7 +343,7 @@ class Classe_Source(Classe):
         texte += self.gen_getters() + "\n"
         texte += self.gen_setters() + "\n"
         texte += self.gen_methodes_generiques() + "\n"
-        return texte
+        return texte.strip("\n")
 
     def gen_entete(self):
         texte = str()
