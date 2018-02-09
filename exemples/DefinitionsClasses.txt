@@ -1,5 +1,5 @@
 a Alexis;Foerster;alexis.foerster@gmail.com
-v 1.0.0;31/07/2017
+v 1.0.0;09/02/2018
 
 c ClasseValeurs
 m int nombreEntier

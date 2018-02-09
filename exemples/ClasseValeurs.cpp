@@ -1,14 +1,14 @@
 //==============================================================================
 // Name        : ClasseValeurs.cpp
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.0.0 (31/07/2017)
+// Version     : 1.0.0 (09/02/2018)
 // Description : Source file of the ClasseValeurs class
 //==============================================================================
 
 #include "ClasseValeurs.h"
 
 ClasseValeurs::ClasseValeurs() :
-        nombreEntier(0), nombreReel(0.0)
+        nombreEntier(0), nombreReel(0.0), texte(std::string())
 {
     this->clear();
 }

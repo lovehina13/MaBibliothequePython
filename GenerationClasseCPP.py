@@ -145,9 +145,12 @@ class Classe(object):
 
     def get_membres_initialisations(self):
         membres = str()
+        if self.heritage is not None:
+            membres += self.heritage + "()" + ", "
         for membre in self.membres:
-            if membre.estNatif() or membre.estPointeur():
-                membres += membre.get_initialisation() + ", "
+            membres += membre.get_initialisation() + ", "
+            # if membre.estNatif() or membre.estPointeur():
+            #    membres += membre.get_initialisation() + ", "
         return membres.rstrip(", ")
 
     def gen_classe(self): pass  # Méthode virtuelle pure

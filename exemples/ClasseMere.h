@@ -1,7 +1,7 @@
 //==============================================================================
 // Name        : ClasseMere.h
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.0.0 (31/07/2017)
+// Version     : 1.0.0 (09/02/2018)
 // Description : Header file of the ClasseMere class
 //==============================================================================
 

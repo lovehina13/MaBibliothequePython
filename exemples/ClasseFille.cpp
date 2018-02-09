@@ -1,13 +1,14 @@
 //==============================================================================
 // Name        : ClasseFille.cpp
 // Author      : Alexis Foerster (alexis.foerster@gmail.com)
-// Version     : 1.0.0 (31/07/2017)
+// Version     : 1.0.0 (09/02/2018)
 // Description : Source file of the ClasseFille class
 //==============================================================================
 
 #include "ClasseFille.h"
 
-ClasseFille::ClasseFille()
+ClasseFille::ClasseFille() :
+        ClasseMere(), pointeurs(ClassePointeurs())
 {
     this->clear();
 }
