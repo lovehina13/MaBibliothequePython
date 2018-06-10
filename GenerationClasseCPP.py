@@ -3,9 +3,10 @@
 #===============================================================================
 # Name        : GenerationClasseCPP.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (31/07/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Génération de classe C++
 #===============================================================================
+
 
 # Classe de définition d'un auteur
 
@@ -16,6 +17,7 @@ class Auteur(object):
         self.nom = nom
         self.email = email
 
+
 # Classe de définition d'une version
 
 class Version(object):
@@ -23,6 +25,7 @@ class Version(object):
     def __init__(self, numero, date):
         self.numero = numero
         self.date = date
+
 
 # Classe abstraite de définition d'un membre
 
@@ -74,6 +77,7 @@ class Membre(object):
     def nomMajuscule(self):
         return str(self.nom[0].upper() + self.nom[1:])
 
+
 # Classe de définition d'un membre dans le fichier d'entête
 
 class Membre_Entete(Membre):
@@ -87,6 +91,7 @@ class Membre_Entete(Membre):
     def get_setter(self):
         return "void set%s(%s)" % (self.nomMajuscule(), self.get_parametre())
 
+
 # Classe de définition d'un membre dans le fichier source
 
 class Membre_Source(Membre):
@@ -99,6 +104,7 @@ class Membre_Source(Membre):
 
     def get_setter(self, classe):
         return "void %s::set%s(%s)\n{\n    this->%s = %s%s;\n}" % (classe.nom, self.nomMajuscule(), self.get_parametre(), self.nom, "" if not self.estPointeur() else "(%s*) " % (self.type), self.nom)
+
 
 # Classe abstraite de définition d'une classe
 
@@ -178,6 +184,7 @@ class Classe(object):
 
     def nomMajuscules(self):
         return str(self.nom.upper())
+
 
 # Classe de définition d'une classe dans le fichier d'entête
 
@@ -307,6 +314,7 @@ class Classe_Entete(Classe):
         texte += "#endif // %s_H" % (self.nomMajuscules()) + "\n"
         return texte.rstrip("\n")
 
+
 # Classe de définition d'une classe dans le fichier source
 
 class Classe_Source(Classe):
@@ -413,10 +421,12 @@ class Classe_Source(Classe):
     def gen_structures(self):
         return str()
 
+
 # Programme principal
 
+import os
+import sys
 from LectureEcritureFichier import lireFichier, ecrireFichier
-import os, sys
 
 if __name__ == "__main__":
     fichierDefinitions = sys.argv[1]

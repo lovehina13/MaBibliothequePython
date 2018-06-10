@@ -3,9 +3,10 @@
 #===============================================================================
 # Name        : ComparaisonFichier.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (07/04/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Comparaison de fichiers
 #===============================================================================
+
 
 def comparerFichiers(fichier1, fichier2, resultat, precision, separateur=" "):
     from ComparaisonElements import identiques
@@ -67,6 +68,7 @@ def comparerFichiers(fichier1, fichier2, resultat, precision, separateur=" "):
 
     arbre = ElementTree.ElementTree(html)
     arbre.write(resultat)
+
 
 def construireDifference(parent, note, contexte1, contexte2):
     from xml.etree import ElementTree

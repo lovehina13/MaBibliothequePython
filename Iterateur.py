@@ -3,9 +3,10 @@
 #===============================================================================
 # Name        : Iterateur.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (22/05/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Itérateur de nombres
 #===============================================================================
+
 
 class Iterateur(object):
 

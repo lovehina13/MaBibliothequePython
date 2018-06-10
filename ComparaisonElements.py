@@ -3,15 +3,16 @@
 #===============================================================================
 # Name        : ComparaisonElements.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (07/04/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Comparaison d'éléments
 #===============================================================================
+
 
 def identiques(a, b):
     if isinstance(a, list) and isinstance(b, list):
         if len(a) != len(b):
             return False
-        for it in range(0, len(a)):
+        for it in range(len(a)):
             if not identiques(a[it], b[it]):
                 return False
         return True

@@ -3,16 +3,18 @@
 #===============================================================================
 # Name        : Points.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (07/04/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Point, liste de points, interpolation et polynôme
 #===============================================================================
+
 
 class Point(object):
 
     def __init__(self, x=0.0, y=0.0):
         self.__x = None
         self.__y = None
-        self.setXY(x, y)
+        self.setX(x)
+        self.setY(y)
 
     def getX(self):
         return self.__x
@@ -32,6 +34,7 @@ class Point(object):
     def setXY(self, x, y):
         self.setX(x)
         self.setY(y)
+
 
 class Points(object):
 
@@ -109,6 +112,7 @@ class Points(object):
         abscissesTriees = sorted(abscisses)
         return abscisses == abscissesTriees
 
+
 def interpolerFichier(fichierEntree, fichierSortie, pas):
     from LectureEcritureFichier import ecrireFichier, lireFichier
     from OperationsTexte import convertirNombreEnTexte, separerEtConvertirTexte
@@ -123,9 +127,10 @@ def interpolerFichier(fichierEntree, fichierSortie, pas):
     listePointsInterpoles = listePoints.interpolerPas(pas)
     lignesFichierSortie = [str("%s %s" % (
         convertirNombreEnTexte(pointInterpole.getX()),
-        convertirNombreEnTexte(pointInterpole.getY()))) \
+        convertirNombreEnTexte(pointInterpole.getY())))
         for pointInterpole in listePointsInterpoles]
     ecrireFichier(fichierSortie, lignesFichierSortie)
+
 
 def recupererPolynomeFichier(fichierEntree, degre):
     from LectureEcritureFichier import lireFichier

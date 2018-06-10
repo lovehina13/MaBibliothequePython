@@ -3,9 +3,10 @@
 #===============================================================================
 # Name        : Temps.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (07/06/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Temps et liste de temps
 #===============================================================================
+
 
 class Temps(object):
 

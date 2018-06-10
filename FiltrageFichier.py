@@ -3,9 +3,10 @@
 #===============================================================================
 # Name        : FiltrageFichier.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (08/04/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Filtrage de fichier
 #===============================================================================
+
 
 def filtrerFichierSelonPrecision(fichier, resultat, precision, separateur=" "):
     from ComparaisonElements import identiques
@@ -61,6 +62,7 @@ def filtrerFichierSelonPrecision(fichier, resultat, precision, separateur=" "):
 
     ecrireFichier(resultat, joindreEtConvertirListeTexte(lignesFiltrees, separateur))
 
+
 def filtrerFichierSelonNombreLignes(fichier, resultat, nbLignes, separateur=" "):
     from LectureEcritureFichier import lireFichier
     import sys
@@ -86,6 +88,7 @@ def filtrerFichierSelonNombreLignes(fichier, resultat, nbLignes, separateur=" ")
         else:
             print "Précision %e suffisante, %d lignes récupérées" % (precision, nbLignesFiltrees)
             break
+
 
 def recupererDeltaValeurs(valeurs):
     from OperationsTexte import convertirTexteEnNombre

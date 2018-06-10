@@ -3,9 +3,10 @@
 #===============================================================================
 # Name        : LectureEcritureFichier.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (07/04/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Lecture et écriture de fichier
 #===============================================================================
+
 
 def lireFichier(nomFichier):
     instanceFichier = open(nomFichier, "r")
@@ -16,6 +17,7 @@ def lireFichier(nomFichier):
         ligneFichierEdit = str(ligneFichier).strip("\n")
         lignesFichierEdit.append(ligneFichierEdit)
     return lignesFichierEdit
+
 
 def ecrireFichier(nomFichier, lignesFichier):
     instanceFichier = open(nomFichier, "w")

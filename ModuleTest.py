@@ -3,7 +3,7 @@
 #===============================================================================
 # Name        : ModuleTest.py
 # Author      : Alexis Foerster (alexis.foerster@gmail.com)
-# Version     : 1.0 (07/04/2017)
+# Version     : 1.0 (10/06/2018)
 # Description : Module de test
 #===============================================================================
 
