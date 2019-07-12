@@ -15,4 +15,4 @@ Les fonctionnalités de la bibliothèque sont les suivantes :
  - Réindentation,
  - Génération de classe C++.
 
-La bibliothèque est réalisée en Python 2.7.13 et nécessite la bibliothèque NumPy 1.12.1 pour certaines de ses fonctionnalités.
+La bibliothèque est réalisée en [Python 2.7.16](https://www.python.org/downloads/release/python-2716/) et nécessite la bibliothèque [NumPy 1.16.2](https://pypi.org/project/numpy/) pour certaines de ses fonctionnalités.
