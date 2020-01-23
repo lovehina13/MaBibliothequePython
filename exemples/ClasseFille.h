@@ -19,7 +19,7 @@ class ClasseFille : public ClasseMere
 public:
     // Constructeurs et destructeurs
     ClasseFille();
-    ClasseFille(const ClassePointeurs& pointeurs);
+    ClasseFille(const ClasseMere& classeMere, const ClassePointeurs& pointeurs);
     ClasseFille(const ClasseFille& classeFille);
     virtual ~ClasseFille();
 
@@ -31,7 +31,7 @@ public:
 
     // Méthodes génériques
     void clear();
-    void set(const ClassePointeurs& pointeurs);
+    void set(const ClasseMere& classeMere, const ClassePointeurs& pointeurs);
     void copy(const ClasseFille& classeFille);
     bool equals(const ClasseFille& classeFille) const;
     void fromString(const std::string& fromString, const char& sep);

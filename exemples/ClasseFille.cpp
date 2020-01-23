@@ -13,10 +13,10 @@ ClasseFille::ClasseFille() :
     this->clear();
 }
 
-ClasseFille::ClasseFille(const ClassePointeurs& pointeurs) :
+ClasseFille::ClasseFille(const ClasseMere& classeMere, const ClassePointeurs& pointeurs) :
         ClasseFille()
 {
-    this->set(pointeurs);
+    this->set(classeMere, pointeurs);
 }
 
 ClasseFille::ClasseFille(const ClasseFille& classeFille) :
@@ -42,21 +42,24 @@ void ClasseFille::setPointeurs(const ClassePointeurs& pointeurs)
 
 void ClasseFille::clear()
 {
-    this->set(ClassePointeurs());
+    this->set(ClasseMere(), ClassePointeurs());
 }
 
-void ClasseFille::set(const ClassePointeurs& pointeurs)
+void ClasseFille::set(const ClasseMere& classeMere, const ClassePointeurs& pointeurs)
 {
+    ClasseMere::copy(classeMere);
     this->setPointeurs(pointeurs);
 }
 
 void ClasseFille::copy(const ClasseFille& classeFille)
 {
-    this->set(classeFille.getPointeurs());
+    this->set(classeFille, classeFille.getPointeurs());
 }
 
 bool ClasseFille::equals(const ClasseFille& classeFille) const
 {
+    if (!ClasseMere::equals(classeFille))
+        return false;
     if (!this->getPointeurs().equals(classeFille.getPointeurs()))
         return false;
     return true;

@@ -44,7 +44,7 @@ class Membre(object):
 
     def get_valeur_defaut(self):
         if self.estPointeur():
-            return "NULL"
+            return "nullptr"
         elif self.estNatif():
             if self.type in ["bool"]:
                 return "false"
@@ -103,7 +103,7 @@ class Membre_Source(Membre):
         return "const %s%s %s::get%s() const\n{\n    return this->%s;\n}" % (self.type, "&" if not self.estPointeur() else "*", classe.nom, self.nomMajuscule(), self.nom)
 
     def get_setter(self, classe):
-        return "void %s::set%s(%s)\n{\n    this->%s = %s%s;\n}" % (classe.nom, self.nomMajuscule(), self.get_parametre(), self.nom, "" if not self.estPointeur() else "(%s*) " % (self.type), self.nom)
+        return "void %s::set%s(%s)\n{\n    this->%s = %s%s%s;\n}" % (classe.nom, self.nomMajuscule(), self.get_parametre(), self.nom, "" if not self.estPointeur() else "const_cast<%s*>(" % (self.type), self.nom, "" if not self.estPointeur() else ")")
 
 
 # Classe abstraite de définition d'une classe
@@ -133,18 +133,24 @@ class Classe(object):
 
     def get_membres(self):
         membres = str()
+        if self.heritage is not None:
+            membres += Classe(nom=self.heritage).nomMinuscule() + ", "
         for membre in self.membres:
             membres += membre.nom + ", "
         return membres.rstrip(", ")
 
     def get_membres_parametres(self):
         membres = str()
+        if self.heritage is not None:
+            membres += Classe(nom=self.heritage).get_parametre() + ", "
         for membre in self.membres:
             membres += membre.get_parametre() + ", "
         return membres.rstrip(", ")
 
     def get_membres_valeurs_defaut(self):
         membres = str()
+        if self.heritage is not None:
+            membres += self.heritage + "()" + ", "
         for membre in self.membres:
             membres += membre.get_valeur_defaut() + ", "
         return membres.rstrip(", ")
@@ -324,18 +330,25 @@ class Classe_Source(Classe):
 
     def get_membres_getters(self):
         membres = str()
+        if self.heritage is not None:
+            membres += self.nomMinuscule() + ", "
         for membre in self.membres:
             membres += "%s.get%s()" % (self.nomMinuscule(), membre.nomMajuscule()) + ", "
         return membres.rstrip(", ")
 
     def get_membres_setters(self):
         membres = str()
+        if self.heritage is not None:
+            membres += "    %s::copy(%s);" % (self.heritage, Classe(nom=self.heritage).nomMinuscule()) + "\n"
         for membre in self.membres:
             membres += "    this->set%s(%s);" % (membre.nomMajuscule(), membre.nom) + "\n"
         return membres.rstrip("\n")
 
     def get_membres_comparaisons(self):
         membres = str()
+        if self.heritage is not None:
+            membres += "    if (!%s::equals(%s))" % (self.heritage, self.nomMinuscule()) + "\n"
+            membres += "        return false;" + "\n"
         for membre in self.membres:
             if membre.estNatif() or membre.estStandard():
                 membres += "    if (this->get%s() != %s.get%s())" % (membre.nomMajuscule(), self.nomMinuscule(), membre.nomMajuscule()) + "\n"

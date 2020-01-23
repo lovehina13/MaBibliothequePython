@@ -8,7 +8,7 @@
 #include "ClassePointeurs.h"
 
 ClassePointeurs::ClassePointeurs() :
-        pointeurNombreEntier(NULL), pointeurNombreReel(NULL), pointeurTexte(NULL)
+        pointeurNombreEntier(nullptr), pointeurNombreReel(nullptr), pointeurTexte(nullptr)
 {
     this->clear();
 }
@@ -47,22 +47,22 @@ const std::string* ClassePointeurs::getPointeurTexte() const
 
 void ClassePointeurs::setPointeurNombreEntier(const int* pointeurNombreEntier)
 {
-    this->pointeurNombreEntier = (int*) pointeurNombreEntier;
+    this->pointeurNombreEntier = const_cast<int*>(pointeurNombreEntier);
 }
 
 void ClassePointeurs::setPointeurNombreReel(const double* pointeurNombreReel)
 {
-    this->pointeurNombreReel = (double*) pointeurNombreReel;
+    this->pointeurNombreReel = const_cast<double*>(pointeurNombreReel);
 }
 
 void ClassePointeurs::setPointeurTexte(const std::string* pointeurTexte)
 {
-    this->pointeurTexte = (std::string*) pointeurTexte;
+    this->pointeurTexte = const_cast<std::string*>(pointeurTexte);
 }
 
 void ClassePointeurs::clear()
 {
-    this->set(NULL, NULL, NULL);
+    this->set(nullptr, nullptr, nullptr);
 }
 
 void ClassePointeurs::set(const int* pointeurNombreEntier, const double* pointeurNombreReel, const std::string* pointeurTexte)
