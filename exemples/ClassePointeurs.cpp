@@ -30,6 +30,22 @@ ClassePointeurs::~ClassePointeurs()
 
 }
 
+ClassePointeurs& ClassePointeurs::operator=(const ClassePointeurs& classePointeurs)
+{
+    this->copy(classePointeurs);
+    return *this;
+}
+
+bool ClassePointeurs::operator==(const ClassePointeurs& classePointeurs) const
+{
+    return this->equals(classePointeurs);
+}
+
+bool ClassePointeurs::operator!=(const ClassePointeurs& classePointeurs) const
+{
+    return !this->equals(classePointeurs);
+}
+
 const int* ClassePointeurs::getPointeurNombreEntier() const
 {
     return this->pointeurNombreEntier;

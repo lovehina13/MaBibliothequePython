@@ -17,5 +17,5 @@ m ClasseValeurs valeurs
 
 c ClasseFille
 h ClasseMere
-m ClassePointeurs pointeurs
+m ClassePointeurs* pointeurs
 

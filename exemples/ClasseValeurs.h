@@ -21,6 +21,11 @@ public:
     ClasseValeurs(const ClasseValeurs& classeValeurs);
     virtual ~ClasseValeurs();
 
+    // Opérateurs
+    ClasseValeurs& operator=(const ClasseValeurs& classeValeurs);
+    bool operator==(const ClasseValeurs& classeValeurs) const;
+    bool operator!=(const ClasseValeurs& classeValeurs) const;
+
     // Getters
     const int& getNombreEntier() const;
     const double& getNombreReel() const;

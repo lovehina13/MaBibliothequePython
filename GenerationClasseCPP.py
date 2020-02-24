@@ -172,6 +172,8 @@ class Classe(object):
     def gen_inclusions(self): pass  # Méthode virtuelle pure
 
     def gen_constructeurs(self): pass  # Méthode virtuelle pure
+    
+    def gen_operateurs(self): pass  # Méthode virtuelle pure
 
     def gen_getters(self): pass  # Méthode virtuelle pure
 
@@ -206,6 +208,7 @@ class Classe_Entete(Classe):
         texte += self.gen_inclusions() + "\n"
         texte += self.gen_classe_debut() + "\n"
         texte += self.gen_constructeurs() + "\n"
+        texte += self.gen_operateurs() + "\n"
         texte += self.gen_getters() + "\n"
         texte += self.gen_setters() + "\n"
         texte += self.gen_methodes_generiques() + "\n"
@@ -258,6 +261,14 @@ class Classe_Entete(Classe):
         texte += "    %s(%s);" % (self.nom, self.get_membres_parametres()) + "\n"
         texte += "    %s(%s);" % (self.nom, self.get_parametre()) + "\n"
         texte += "    virtual ~%s();" % (self.nom) + "\n"
+        return texte
+
+    def gen_operateurs(self):
+        texte = str()
+        texte += "    // Opérateurs" + "\n"
+        texte += "    %s& operator=(%s);" % (self.nom, self.get_parametre()) + "\n"
+        texte += "    bool operator==(%s) const;" % (self.get_parametre()) + "\n"
+        texte += "    bool operator!=(%s) const;" % (self.get_parametre()) + "\n"
         return texte
 
     def gen_getters(self):
@@ -350,12 +361,11 @@ class Classe_Source(Classe):
             membres += "    if (!%s::equals(%s))" % (self.heritage, self.nomMinuscule()) + "\n"
             membres += "        return false;" + "\n"
         for membre in self.membres:
-            if membre.estNatif() or membre.estStandard():
-                membres += "    if (this->get%s() != %s.get%s())" % (membre.nomMajuscule(), self.nomMinuscule(), membre.nomMajuscule()) + "\n"
-            elif not membre.estPointeur():
-                membres += "    if (!this->get%s().equals(%s.get%s()))" % (membre.nomMajuscule(), self.nomMinuscule(), membre.nomMajuscule()) + "\n"
-            else:
-                membres += "    if (!this->get%s()->equals(*%s.get%s()))" % (membre.nomMajuscule(), self.nomMinuscule(), membre.nomMajuscule()) + "\n"
+            membres += "    if (this->get%s() != %s.get%s())" % (membre.nomMajuscule(), self.nomMinuscule(), membre.nomMajuscule()) + "\n"
+            # if not membre.estPointeur():
+            #     membres += "    if (this->get%s() != %s.get%s())" % (membre.nomMajuscule(), self.nomMinuscule(), membre.nomMajuscule()) + "\n"
+            # else:
+            #     membres += "    if (*this->get%s() != *%s.get%s())" % (membre.nomMajuscule(), self.nomMinuscule(), membre.nomMajuscule()) + "\n"
             membres += "        return false;" + "\n"
         return membres.rstrip("\n")
 
@@ -364,6 +374,7 @@ class Classe_Source(Classe):
         texte += self.gen_entete() + "\n"
         texte += self.gen_inclusions() + "\n"
         texte += self.gen_constructeurs() + "\n"
+        texte += self.gen_operateurs() + "\n"
         texte += self.gen_getters() + "\n"
         texte += self.gen_setters() + "\n"
         texte += self.gen_methodes_generiques() + "\n"
@@ -390,6 +401,13 @@ class Classe_Source(Classe):
         texte += "%s::%s(%s) :\n        %s()\n{\n    this->set(%s);\n}" % (self.nom, self.nom, self.get_membres_parametres(), self.nom, self.get_membres()) + "\n\n"
         texte += "%s::%s(%s) :\n        %s()\n{\n    this->copy(%s);\n}" % (self.nom, self.nom, self.get_parametre(), self.nom, self.nomMinuscule()) + "\n\n"
         texte += "%s::~%s()\n{\n\n}" % (self.nom, self.nom) + "\n"
+        return texte
+
+    def gen_operateurs(self):
+        texte = str()
+        texte += "%s& %s::operator=(%s)\n{\n    this->copy(%s);\n    return *this;\n}" % (self.nom, self.nom, self.get_parametre(), self.nomMinuscule()) + "\n\n"
+        texte += "bool %s::operator==(%s) const\n{\n    return this->equals(%s);\n}" % (self.nom, self.get_parametre(), self.nomMinuscule()) + "\n\n"
+        texte += "bool %s::operator!=(%s) const\n{\n    return !this->equals(%s);\n}" % (self.nom, self.get_parametre(), self.nomMinuscule()) + "\n"
         return texte
 
     def gen_getters(self):

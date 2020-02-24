@@ -21,6 +21,11 @@ public:
     ClassePointeurs(const ClassePointeurs& classePointeurs);
     virtual ~ClassePointeurs();
 
+    // Opérateurs
+    ClassePointeurs& operator=(const ClassePointeurs& classePointeurs);
+    bool operator==(const ClassePointeurs& classePointeurs) const;
+    bool operator!=(const ClassePointeurs& classePointeurs) const;
+
     // Getters
     const int* getPointeurNombreEntier() const;
     const double* getPointeurNombreReel() const;

@@ -8,12 +8,12 @@
 #include "ClasseFille.h"
 
 ClasseFille::ClasseFille() :
-        ClasseMere(), pointeurs(ClassePointeurs())
+        ClasseMere(), pointeurs(nullptr)
 {
     this->clear();
 }
 
-ClasseFille::ClasseFille(const ClasseMere& classeMere, const ClassePointeurs& pointeurs) :
+ClasseFille::ClasseFille(const ClasseMere& classeMere, const ClassePointeurs* pointeurs) :
         ClasseFille()
 {
     this->set(classeMere, pointeurs);
@@ -30,22 +30,38 @@ ClasseFille::~ClasseFille()
 
 }
 
-const ClassePointeurs& ClasseFille::getPointeurs() const
+ClasseFille& ClasseFille::operator=(const ClasseFille& classeFille)
+{
+    this->copy(classeFille);
+    return *this;
+}
+
+bool ClasseFille::operator==(const ClasseFille& classeFille) const
+{
+    return this->equals(classeFille);
+}
+
+bool ClasseFille::operator!=(const ClasseFille& classeFille) const
+{
+    return !this->equals(classeFille);
+}
+
+const ClassePointeurs* ClasseFille::getPointeurs() const
 {
     return this->pointeurs;
 }
 
-void ClasseFille::setPointeurs(const ClassePointeurs& pointeurs)
+void ClasseFille::setPointeurs(const ClassePointeurs* pointeurs)
 {
-    this->pointeurs = pointeurs;
+    this->pointeurs = const_cast<ClassePointeurs*>(pointeurs);
 }
 
 void ClasseFille::clear()
 {
-    this->set(ClasseMere(), ClassePointeurs());
+    this->set(ClasseMere(), nullptr);
 }
 
-void ClasseFille::set(const ClasseMere& classeMere, const ClassePointeurs& pointeurs)
+void ClasseFille::set(const ClasseMere& classeMere, const ClassePointeurs* pointeurs)
 {
     ClasseMere::copy(classeMere);
     this->setPointeurs(pointeurs);
@@ -60,7 +76,7 @@ bool ClasseFille::equals(const ClasseFille& classeFille) const
 {
     if (!ClasseMere::equals(classeFille))
         return false;
-    if (!this->getPointeurs().equals(classeFille.getPointeurs()))
+    if (this->getPointeurs() != classeFille.getPointeurs())
         return false;
     return true;
 }

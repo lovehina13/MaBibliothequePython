@@ -30,6 +30,22 @@ ClasseValeurs::~ClasseValeurs()
 
 }
 
+ClasseValeurs& ClasseValeurs::operator=(const ClasseValeurs& classeValeurs)
+{
+    this->copy(classeValeurs);
+    return *this;
+}
+
+bool ClasseValeurs::operator==(const ClasseValeurs& classeValeurs) const
+{
+    return this->equals(classeValeurs);
+}
+
+bool ClasseValeurs::operator!=(const ClasseValeurs& classeValeurs) const
+{
+    return !this->equals(classeValeurs);
+}
+
 const int& ClasseValeurs::getNombreEntier() const
 {
     return this->nombreEntier;

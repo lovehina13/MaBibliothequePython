@@ -22,6 +22,11 @@ public:
     ClasseMere(const ClasseMere& classeMere);
     virtual ~ClasseMere();
 
+    // Opérateurs
+    ClasseMere& operator=(const ClasseMere& classeMere);
+    bool operator==(const ClasseMere& classeMere) const;
+    bool operator!=(const ClasseMere& classeMere) const;
+
     // Getters
     const std::string& getNom() const;
     const ClasseValeurs& getValeurs() const;

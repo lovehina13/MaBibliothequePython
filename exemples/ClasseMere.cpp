@@ -30,6 +30,22 @@ ClasseMere::~ClasseMere()
 
 }
 
+ClasseMere& ClasseMere::operator=(const ClasseMere& classeMere)
+{
+    this->copy(classeMere);
+    return *this;
+}
+
+bool ClasseMere::operator==(const ClasseMere& classeMere) const
+{
+    return this->equals(classeMere);
+}
+
+bool ClasseMere::operator!=(const ClasseMere& classeMere) const
+{
+    return !this->equals(classeMere);
+}
+
 const std::string& ClasseMere::getNom() const
 {
     return this->nom;
@@ -70,7 +86,7 @@ bool ClasseMere::equals(const ClasseMere& classeMere) const
 {
     if (this->getNom() != classeMere.getNom())
         return false;
-    if (!this->getValeurs().equals(classeMere.getValeurs()))
+    if (this->getValeurs() != classeMere.getValeurs())
         return false;
     return true;
 }

@@ -19,19 +19,24 @@ class ClasseFille : public ClasseMere
 public:
     // Constructeurs et destructeurs
     ClasseFille();
-    ClasseFille(const ClasseMere& classeMere, const ClassePointeurs& pointeurs);
+    ClasseFille(const ClasseMere& classeMere, const ClassePointeurs* pointeurs);
     ClasseFille(const ClasseFille& classeFille);
     virtual ~ClasseFille();
 
+    // Opérateurs
+    ClasseFille& operator=(const ClasseFille& classeFille);
+    bool operator==(const ClasseFille& classeFille) const;
+    bool operator!=(const ClasseFille& classeFille) const;
+
     // Getters
-    const ClassePointeurs& getPointeurs() const;
+    const ClassePointeurs* getPointeurs() const;
 
     // Setters
-    void setPointeurs(const ClassePointeurs& pointeurs);
+    void setPointeurs(const ClassePointeurs* pointeurs);
 
     // Méthodes génériques
     void clear();
-    void set(const ClasseMere& classeMere, const ClassePointeurs& pointeurs);
+    void set(const ClasseMere& classeMere, const ClassePointeurs* pointeurs);
     void copy(const ClasseFille& classeFille);
     bool equals(const ClasseFille& classeFille) const;
     void fromString(const std::string& fromString, const char& sep);
@@ -42,7 +47,7 @@ public:
 
 private:
     // Membres de classe
-    ClassePointeurs pointeurs;
+    ClassePointeurs* pointeurs;
 };
 
 typedef ClasseFille* PtrClasseFille;
