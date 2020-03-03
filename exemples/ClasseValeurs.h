@@ -55,11 +55,15 @@ private:
 };
 
 typedef ClasseValeurs* PtrClasseValeurs;
+typedef const ClasseValeurs* CPtrClasseValeurs;
 typedef std::vector<ClasseValeurs> ListeClasseValeurs_;
 typedef std::vector<PtrClasseValeurs> ListePtrClasseValeurs_;
+typedef std::vector<CPtrClasseValeurs> ListeCPtrClasseValeurs_;
 typedef std::map<int, ClasseValeurs> MapIdClasseValeurs_;
 typedef std::map<int, PtrClasseValeurs> MapIdPtrClasseValeurs_;
+typedef std::map<int, CPtrClasseValeurs> MapIdCPtrClasseValeurs_;
 typedef std::map<std::string, ClasseValeurs> MapNomsClasseValeurs_;
 typedef std::map<std::string, PtrClasseValeurs> MapNomsPtrClasseValeurs_;
+typedef std::map<std::string, CPtrClasseValeurs> MapNomsCPtrClasseValeurs_;
 
 #endif // CLASSEVALEURS_H

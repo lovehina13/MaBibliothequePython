@@ -51,11 +51,15 @@ private:
 };
 
 typedef ClasseFille* PtrClasseFille;
+typedef const ClasseFille* CPtrClasseFille;
 typedef std::vector<ClasseFille> ListeClasseFille_;
 typedef std::vector<PtrClasseFille> ListePtrClasseFille_;
+typedef std::vector<CPtrClasseFille> ListeCPtrClasseFille_;
 typedef std::map<int, ClasseFille> MapIdClasseFille_;
 typedef std::map<int, PtrClasseFille> MapIdPtrClasseFille_;
+typedef std::map<int, CPtrClasseFille> MapIdCPtrClasseFille_;
 typedef std::map<std::string, ClasseFille> MapNomsClasseFille_;
 typedef std::map<std::string, PtrClasseFille> MapNomsPtrClasseFille_;
+typedef std::map<std::string, CPtrClasseFille> MapNomsCPtrClasseFille_;
 
 #endif // CLASSEFILLE_H

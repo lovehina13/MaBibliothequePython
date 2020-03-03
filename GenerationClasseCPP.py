@@ -318,12 +318,16 @@ class Classe_Entete(Classe):
     def gen_structures(self):
         texte = str()
         texte += "typedef %s* Ptr%s;" % (self.nom, self.nom) + "\n"
+        texte += "typedef const %s* CPtr%s;" % (self.nom, self.nom) + "\n"
         texte += "typedef std::vector<%s> Liste%s_;" % (self.nom, self.nom) + "\n"
         texte += "typedef std::vector<Ptr%s> ListePtr%s_;" % (self.nom, self.nom) + "\n"
+        texte += "typedef std::vector<CPtr%s> ListeCPtr%s_;" % (self.nom, self.nom) + "\n"
         texte += "typedef std::map<int, %s> MapId%s_;" % (self.nom, self.nom) + "\n"
         texte += "typedef std::map<int, Ptr%s> MapIdPtr%s_;" % (self.nom, self.nom) + "\n"
+        texte += "typedef std::map<int, CPtr%s> MapIdCPtr%s_;" % (self.nom, self.nom) + "\n"
         texte += "typedef std::map<std::string, %s> MapNoms%s_;" % (self.nom, self.nom) + "\n"
         texte += "typedef std::map<std::string, Ptr%s> MapNomsPtr%s_;" % (self.nom, self.nom) + "\n"
+        texte += "typedef std::map<std::string, CPtr%s> MapNomsCPtr%s_;" % (self.nom, self.nom) + "\n"
         return texte
 
     def gen_definition_fin(self):

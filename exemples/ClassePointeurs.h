@@ -55,11 +55,15 @@ private:
 };
 
 typedef ClassePointeurs* PtrClassePointeurs;
+typedef const ClassePointeurs* CPtrClassePointeurs;
 typedef std::vector<ClassePointeurs> ListeClassePointeurs_;
 typedef std::vector<PtrClassePointeurs> ListePtrClassePointeurs_;
+typedef std::vector<CPtrClassePointeurs> ListeCPtrClassePointeurs_;
 typedef std::map<int, ClassePointeurs> MapIdClassePointeurs_;
 typedef std::map<int, PtrClassePointeurs> MapIdPtrClassePointeurs_;
+typedef std::map<int, CPtrClassePointeurs> MapIdCPtrClassePointeurs_;
 typedef std::map<std::string, ClassePointeurs> MapNomsClassePointeurs_;
 typedef std::map<std::string, PtrClassePointeurs> MapNomsPtrClassePointeurs_;
+typedef std::map<std::string, CPtrClassePointeurs> MapNomsCPtrClassePointeurs_;
 
 #endif // CLASSEPOINTEURS_H
